@@ -1,0 +1,129 @@
+﻿@page "/Ticket"
+@page "/Ticket/{TicketId:int}"
+@inject HttpClient httpClient
+
+<EditForm Model="Ticket" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>Registro de Tickets.</h3>
+            </div>
+            <div class=card-body>
+
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>Ticket Id:</label>
+                    <div class="input-group mb-3">
+                        <InputNumber @bind-Value="Ticket.TicketId" class="form-control" aria-describedby="BotonBuscar" />
+                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="oi oi-magnifying-glass" /></button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Fecha">Fecha:</label>
+                    <InputDate @bind-Value="Ticket.Fecha" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Fecha)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="SolicitadoPor">SolicitadoPor:</label>
+                    <InputText @bind-Value="Ticket.SolicitadoPor" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.SolicitadoPor)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Asunto">Asunto:</label>
+                    <InputText @bind-Value="Ticket.Asunto" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Asunto)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Descripcion">Descripcion:</label>
+                    <InputText @bind-Value="Ticket.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Descripcion)" />
+                </div>
+
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+                    <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document" /></button>
+                    <button type="button" class="btn btn-outline-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</EditForm>
+<label>@Mensaje</label>
+
+
+@code {
+
+    [Parameter]
+
+    public int TicketId { get; set; }
+
+    public Tickets Ticket { get; set; } = new Tickets();
+
+    public string Mensaje { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(TicketId>0)
+        {
+            this.Ticket.TicketId = TicketId;
+            await Buscar();
+        }
+    }
+
+    public async Task Buscar()
+    {
+        var ticketEncontrado = await httpClient.GetFromJsonAsync<Tickets>($"api/Tickets/{Ticket.TicketId}");
+        if (ticketEncontrado != null)
+        {
+            this.Ticket = ticketEncontrado;
+            StateHasChanged();
+        }
+        else
+        {
+            Mensaje = "Ticket no encontrado";
+        }
+    }
+
+    public async void Guardar()
+    {
+        using var response = await httpClient.PostAsJsonAsync("api/Tickets", Ticket);
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        var ticketDevuelto = await response.Content.ReadFromJsonAsync<Tickets>();
+        if (ticketDevuelto is not null)
+        {
+            Ticket = ticketDevuelto;
+            StateHasChanged();
+        }
+    }
+
+    public void Nuevo()
+    {
+        this.Ticket = new Tickets();
+        Mensaje = string.Empty;
+    }
+
+    public async Task Eliminar()
+    {
+        using var response = await httpClient.DeleteAsync($"api/Tickets/{Ticket.TicketId}");
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        else
+            Nuevo();
+    }
+}

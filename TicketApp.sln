@@ -1,0 +1,64 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketApp.Server", "Server\TicketApp.Server.csproj", "{296C4E45-708E-4408-84D8-97C2B5887A16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketApp.Client", "Client\TicketApp.Client.csproj", "{4B7B389F-F89F-4290-B2F2-EA775524ACD0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketApp.Shared", "Shared\TicketApp.Shared.csproj", "{30041D69-B2E7-4214-9107-B0A0DB680938}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Debug|x64.Build.0 = Debug|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Debug|x86.Build.0 = Debug|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Release|x64.ActiveCfg = Release|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Release|x64.Build.0 = Release|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Release|x86.ActiveCfg = Release|Any CPU
+		{296C4E45-708E-4408-84D8-97C2B5887A16}.Release|x86.Build.0 = Release|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Debug|x64.Build.0 = Debug|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Debug|x86.Build.0 = Debug|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Release|x64.ActiveCfg = Release|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Release|x64.Build.0 = Release|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Release|x86.ActiveCfg = Release|Any CPU
+		{4B7B389F-F89F-4290-B2F2-EA775524ACD0}.Release|x86.Build.0 = Release|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Debug|x64.Build.0 = Debug|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Debug|x86.Build.0 = Debug|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Release|x64.ActiveCfg = Release|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Release|x64.Build.0 = Release|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Release|x86.ActiveCfg = Release|Any CPU
+		{30041D69-B2E7-4214-9107-B0A0DB680938}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {471094CC-D7EF-4737-A83E-C39B97A5CF4D}
+	EndGlobalSection
+EndGlobal
