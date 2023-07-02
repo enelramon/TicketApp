@@ -12,6 +12,7 @@
             </div>
             <div class=card-body>
 
+                @*Ticket Id:*@
                 <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
                     <label>Ticket Id:</label>
                     <div class="input-group mb-3">
@@ -20,24 +21,28 @@
                     </div>
                 </div>
 
+                @*Fecha:*@
                 <div class="mb-3">
                     <label class="form-label" for="Fecha">Fecha:</label>
                     <InputDate @bind-Value="Ticket.Fecha" class="form-control" />
                     <ValidationMessage For="@(() => Ticket.Fecha)" />
                 </div>
 
+                @*SolicitadoPor*@
                 <div class="mb-3">
                     <label class="form-label" for="SolicitadoPor">SolicitadoPor:</label>
                     <InputText @bind-Value="Ticket.SolicitadoPor" class="form-control" />
                     <ValidationMessage For="@(() => Ticket.SolicitadoPor)" />
                 </div>
 
+                @*Asunto*@
                 <div class="mb-3">
                     <label class="form-label" for="Asunto">Asunto:</label>
                     <InputText @bind-Value="Ticket.Asunto" class="form-control" />
                     <ValidationMessage For="@(() => Ticket.Asunto)" />
                 </div>
 
+                @*Descripcion*@
                 <div class="mb-3">
                     <label class="form-label" for="Descripcion">Descripcion:</label>
                     <InputText @bind-Value="Ticket.Descripcion" class="form-control" />
@@ -93,7 +98,7 @@
         }
     }
 
-    public async void Guardar()
+    public async Task Guardar()
     {
         using var response = await httpClient.PostAsJsonAsync("api/Tickets", Ticket);
         if (!response.IsSuccessStatusCode)

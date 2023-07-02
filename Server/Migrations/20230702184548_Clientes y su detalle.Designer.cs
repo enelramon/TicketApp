@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketApp.Server.DAL;
 
@@ -10,9 +11,11 @@ using TicketApp.Server.DAL;
 namespace TicketApp.Server.Migrations
 {
     [DbContext(typeof(TicketContext))]
-    partial class TicketContextModelSnapshot : ModelSnapshot
+    [Migration("20230702184548_Clientes y su detalle")]
+    partial class Clientesysudetalle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.7");

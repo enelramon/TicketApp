@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TicketApp.Shared;
-
 
 public class Tickets
 {
     [Key]
     public int TicketId { get; set; }
 
-    public DateTime Fecha { get; set; }  
+    public DateTime Fecha { get; set; }
+
+    public int ClienteId { get; set; }
 
     [Required(ErrorMessage = "Solicitado es requerido")]
     public string? SolicitadoPor { get; set; }
@@ -26,3 +21,4 @@ public class Tickets
     public string? Descripcion { get; set; }
 
 }
+
