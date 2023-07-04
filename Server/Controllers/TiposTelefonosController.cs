@@ -16,6 +16,15 @@ public class TiposTelefonosController : ControllerBase
         _context = context;
     }
 
+    // GET: api/TiposTelefonos/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TiposTelefonos>> GetTipoTelefono(int id)
+    {
+        var tipo = await _context.TiposTelefonos.FindAsync(id);
+
+        return tipo!;
+    }
+
     // GET: api/TiposTelefonos
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TiposTelefonos>>> GetTiposTelefonos()

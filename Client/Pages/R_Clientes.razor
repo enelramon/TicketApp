@@ -51,7 +51,7 @@
                 @*DETALLE*@
                 <fieldset class="border-success border border-1">
                     <h3>Tel&eacute;fonos del cliente</h3>
-                    <div class="row">
+                    <div class="row m-1">
                         @*TipoTelefono *@
                         <div class="col-2">
                             <label>TipoTelefono:</label>
@@ -83,11 +83,9 @@
                         }
                     </div>
 
-                    @*Tabla de detalles*@
-                    @if (Cliente.ClientesDetalle != null)
-                    {
+                    @*Tabla de detalles*@ 
                         <hr />
-                        <table class="table table-bordered table-light">
+                        <table class="table table-bordered table-light m-1">
                             <thead class="thead">
                                 <tr class="table">
                                     <th>Tipo Telefono</th>
@@ -98,7 +96,7 @@
                                 @foreach (var detalle in Cliente.ClientesDetalle)
                                 {
                                     <tr>
-                                        <td>@detalle.TipoId</td>
+                                    <td>@( DescripcionTipo(detalle.TipoId) )</td>
                                         <td>@detalle.Telefono</td>
                                         <td> <button @onclick="@(() => RemoverDetalle(detalle))"><i class="oi oi-trash" /> Eliminar</button>   </td>
                                     </tr>
@@ -114,9 +112,7 @@
                             </div>
                         </div>
 
-                        <hr />
-
-                    }
+                        <hr /> 
                 </fieldset>
 
             </div>
@@ -194,14 +190,21 @@
                 Telefono = TelefonoSeleccionado
         });
         TipoTelefonoSeleccionado = 0;
-        TelefonoSeleccionado = "";
+        TelefonoSeleccionado = string.Empty;
         StateHasChanged();
     }
 
+    public string DescripcionTipo(int tipoId)
+    {
+        var tipoTelefono = TiposTelefonosList.FirstOrDefault(t => t.TipoId == tipoId);
+
+        return tipoTelefono!.Descripcion;
+    }
     public void RemoverDetalle(ClientesDetalle detalleRemover)
     {
         TipoTelefonoSeleccionado = detalleRemover.TipoId;
         TelefonoSeleccionado = detalleRemover.Telefono;
+
         Cliente.ClientesDetalle.Remove(detalleRemover);
     }
 
@@ -241,6 +244,10 @@
     {
         this.Cliente = new Clientes();
         Mensaje = string.Empty;
+        ValidacionDetalle = string.Empty;
+
+        TipoTelefonoSeleccionado = 0;
+        TelefonoSeleccionado = string.Empty;
     }
 
     public async Task Eliminar()
