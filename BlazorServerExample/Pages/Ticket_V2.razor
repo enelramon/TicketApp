@@ -1,9 +1,9 @@
-﻿@page "/"
-@inject TicketsBLL ticketBLL
+﻿@page "/ticketv2"
+@inject TicketsViewModel ticketViewModel
 
 <PageTitle>Registro de tickets</PageTitle>
 
-<EditForm Model="Ticket" OnValidSubmit="Guardar">
+<EditForm Model="Ticket" OnValidSubmit="ticketViewModel.Save">
     <DataAnnotationsValidator />
 
     <div class="container">
@@ -18,7 +18,7 @@
                     <label>Ticket Id:</label>
                     <div class="input-group mb-3">
                         <InputNumber @bind-Value="Ticket.TicketId" class="form-control" aria-describedby="BotonBuscar" />
-                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="oi oi-magnifying-glass" /></button>
+                        <button @onclick="ticketViewModel.Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="oi oi-magnifying-glass" /></button>
                     </div>
                 </div>
 
@@ -53,57 +53,18 @@
             </div>
             <div class="card-footer d-flex justify-content-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+                    <button type="button" class="btn btn-outline-primary" @onclick="ticketViewModel.Nuevo">Nuevo <i class="oi oi-file" /></button>
                     <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document" /></button>
-                    <button type="button" class="btn btn-outline-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
+                    <button type="button" class="btn btn-outline-danger" @onclick="ticketViewModel.Eliminar">Eliminar <i class="oi oi-trash" /></button>
                 </div>
             </div>
         </div>
     </div>
 </EditForm>
-<label>@Mensaje</label>
+<label>@ticketViewModel.Mensaje</label>
 
 @code{
-    public Tickets Ticket { get; set; } = new Tickets();
+    public Tickets Ticket => ticketViewModel.Ticket;
 
-    public string Mensaje { get; set; } = string.Empty;
-
-    public async Task Buscar()
-    {
-        var encontrado = ticketBLL.Find(Ticket.TicketId);
-        if (encontrado != null)
-            Ticket = encontrado;
-        else
-            Mensaje = "No se encontro el ticket";
-    }
-
-    public async Task Guardar()
-    {
-        var guardo = ticketBLL.Save(Ticket);
-        if (guardo)
-        {            
-            Mensaje = "Se guardo correctamente";
-            Nuevo();
-        }
-        else
-            Mensaje = "No se pudo guardar el ticket";
-    }
-
-    public void Nuevo()
-    {
-        this.Ticket = new Tickets();
-        Mensaje = string.Empty;
-    }
-
-    public async Task Eliminar()
-    {
-       var eliminado= ticketBLL.Delete(Ticket.TicketId);
-       if (eliminado)
-        {
-            Mensaje = "Se elimino correctamente";
-            Nuevo();
-        }
-        else
-            Mensaje = "No se pudo eliminar el ticket";
-    }
+    
 }

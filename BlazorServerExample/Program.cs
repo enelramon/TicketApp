@@ -1,13 +1,20 @@
 using BlazorServerExample.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using BlazorServerExample.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+
+
+//Inyectar el contexto
+builder.Services.AddDbContext<Contexto>(options =>
+    options.UseSqlite("Data Source=Ticket.db"));
+
+builder.Services.AddScoped<TicketsBLL>();
+builder.Services.AddScoped<TicketsViewModel>();
 
 var app = builder.Build();
 
