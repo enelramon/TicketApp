@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlazorServerExample.Data;
 
-//Instalar entitiframework 
+//Instalar entityframework 
 // dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 // dotnet add package Microsoft.EntityFrameworkCore.Tools
 
 //Crear el modelo
 public class Tickets
 {
+    [Key]
     public int TicketId { get; set; }
 
     [Required(ErrorMessage = "El campo {0} es requerido")]
