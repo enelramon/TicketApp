@@ -2,7 +2,7 @@ package com.ucne.ticketcompose.di
 
 import android.content.Context
 import androidx.room.Room
-import com.ucne.ticketcompose.TicketDb
+import com.ucne.ticketcompose.data.local.TicketDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideTicketDatabase(@ApplicationContext appContext: Context): TicketDb =
+    fun providesTicketDatabase(@ApplicationContext appContext: Context): TicketDb =
         Room.databaseBuilder(
             appContext,
             TicketDb::class.java,

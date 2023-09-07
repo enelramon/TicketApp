@@ -6,16 +6,13 @@ namespace BlazorServerExample.Data;
 //Instalar entityframework 
 // dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 // dotnet add package Microsoft.EntityFrameworkCore.Tools
-
 //Crear el modelo
 public class Tickets
 {
     [Key]
     public int TicketId { get; set; }
-
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public string Cliente { get; set; }
-
     [Required(ErrorMessage = "El campo {0} es requerido")]
     public string SolicitadoPor { get; set; }
     public string Asunto { get; set; }
@@ -52,9 +49,9 @@ public class TicketsBLL
         return saved;
     }
 
-    public Tickets? Find(int id)
+    public async Task<Tickets?> FindAsync(int id)
     {
-        var ticket = _contexto.Tickets.Find(id);
+        var ticket = await _contexto.Tickets.FindAsync(id);
         return ticket;
     }
 
@@ -65,7 +62,6 @@ public class TicketsBLL
         var deleted = _contexto.SaveChanges() > 0;
         return deleted;
     }
-
     //get all
     public List<Tickets> GetTickets()
     {

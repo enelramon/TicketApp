@@ -11,6 +11,10 @@ public class TicketsViewModel
     private readonly TicketsBLL _ticketBLL;
     public TicketsViewModel(TicketsBLL ticketBLL)
     {
+        var t = new Tickets{
+            TicketId=0,
+            SolicitadoPor=""
+        }
         this._ticketBLL = ticketBLL;
     }
     public Tickets Ticket
