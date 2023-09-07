@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ucne.ticketcompose.data.local.TicketDb
 import com.ucne.ticketcompose.data.local.entities.Ticket
+import com.ucne.ticketcompose.data.repository.TicketRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,10 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TicketViewModel @Inject constructor(
-    private val ticketDb: TicketDb
+    private val ticketRepository: TicketRepository
 ) : ViewModel() {
 
     var cliente by mutableStateOf("")
+    var clienteError by mutableStateOf(false)
     var solicitadoPor by mutableStateOf("")
     var asunto by mutableStateOf("")
     var solicitud by mutableStateOf("")
@@ -35,7 +36,12 @@ class TicketViewModel @Inject constructor(
         }
     }
 
-    val tickets: StateFlow<List<Ticket>> = ticketDb.ticketDao().getAll()
+    fun onClienteChanged(valor: String) {
+        cliente = valor
+        clienteError = valor.isBlank();
+    }
+
+    val tickets: StateFlow<List<Ticket>> = ticketRepository.getAll()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -50,15 +56,15 @@ class TicketViewModel @Inject constructor(
                 asunto = asunto,
                 solicitud = solicitud
             )
-            ticketDb.ticketDao().save(ticket)
+            ticketRepository.guardarTicket(ticket)
             limpiar()
         }
     }
 
     private fun limpiar() {
-        cliente=""
-        solicitadoPor =""
-        asunto =""
-        solicitud =""
+        cliente = ""
+        solicitadoPor = ""
+        asunto = ""
+        solicitud = ""
     }
 }
