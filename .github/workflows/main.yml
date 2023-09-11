@@ -23,5 +23,5 @@ jobs:
             cache: gradle
         - run: echo "The workflow is now ready to test your code."
         - name: Grant execute permission for gradlew
-          run: chmod +x ./TicketCompose/gradlew/gradlew
+          run: chmod +x ./TicketCompose/gradlew
           
