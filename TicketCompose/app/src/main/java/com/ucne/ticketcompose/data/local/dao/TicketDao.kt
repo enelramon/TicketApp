@@ -29,3 +29,24 @@ interface TicketDao {
     @Query("SELECT * FROM Tickets")
     fun getAll(): Flow<List<Ticket>>
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

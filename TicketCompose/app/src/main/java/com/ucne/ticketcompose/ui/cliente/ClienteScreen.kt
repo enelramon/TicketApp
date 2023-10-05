@@ -1,9 +1,13 @@
 package com.ucne.ticketcompose.ui.cliente
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,13 +25,43 @@ import com.ucne.ticketcompose.ui.theme.TicketComposeTheme
 @Composable
 fun ClienteScreen() {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .padding(8.dp)
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = "Nombres",
             onValueChange = {})
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = "Email",
+            onValueChange = {})
+        Spacer(modifier = Modifier.height(8.dp))
+        Row {
+            OutlinedTextField(
+                modifier = Modifier.weight(1f),
+                value = "Telefono",
+                onValueChange = {})
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            OutlinedTextField(
+                modifier = Modifier.weight(1f),
+                value = "Celular",
+                onValueChange = {})
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = "Email",
+            onValueChange = {})
+
+        Spacer(modifier = Modifier.height(8.dp))
 
         OutlinedButton(
             modifier = Modifier.fillMaxWidth(),

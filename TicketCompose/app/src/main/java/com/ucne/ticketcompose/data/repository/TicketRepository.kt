@@ -10,3 +10,4 @@ class TicketRepository @Inject constructor(
     suspend fun  guardarTicket(ticket: Ticket) = ticketDb.ticketDao().save(ticket)
     fun getAll() = ticketDb.ticketDao().getAll()
 }
+

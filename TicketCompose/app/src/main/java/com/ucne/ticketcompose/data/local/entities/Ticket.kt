@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Tickets")
 data class Ticket(
     @PrimaryKey
-    val ticketId: Int?=null ,
+    val ticketId: Int? = null,
     var cliente: String = "",
     var solicitadoPor: String = "",
     var asunto: String = "",
     var solicitud: String = ""
 )
+
