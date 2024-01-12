@@ -11,10 +11,11 @@ public class TicketsViewModel
     private readonly TicketsBLL _ticketBLL;
     public TicketsViewModel(TicketsBLL ticketBLL)
     {
-        var t = new Tickets{
-            TicketId=0,
-            SolicitadoPor=""
-        }
+        var t = new Tickets
+        {
+            TicketId = 0,
+            SolicitadoPor = ""
+        };
         this._ticketBLL = ticketBLL;
     }
     public Tickets Ticket
@@ -29,9 +30,9 @@ public class TicketsViewModel
         set { _mensaje = value; }
     }
 
-    public void Buscar()
+    public async Task Buscar()
     {
-        var encontrado =  _ticketBLL.Find(Ticket.TicketId); 
+        var encontrado =  _ticketBLL.FindAsync(Ticket.TicketId).Result; 
         if (encontrado != null)
             Ticket = encontrado;
         else
