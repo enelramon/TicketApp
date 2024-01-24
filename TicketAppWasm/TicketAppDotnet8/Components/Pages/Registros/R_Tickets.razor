@@ -1,0 +1,138 @@
+﻿@page "/Tickets"
+@rendermode InteractiveServer
+@using TicketAppDotnet8.BLL
+@using TicketAppDotnet8.Models
+@inject TicketsBLL ticketBLL
+
+<PageTitle>Registro de tickets</PageTitle>
+
+<EditForm Model="Ticket" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>Registro de Tickets.</h3>
+            </div>
+            <div class=card-body>
+
+                @*Ticket Id:*@
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>Ticket Id:</label>
+                    <div class="input-group mb-3">
+                        <InputNumber @bind-Value="Ticket.TicketId" class="form-control" aria-describedby="BotonBuscar" />
+                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+
+                @*Cliente*@
+                <div class="mb-3">
+                    <label class="form-label" for="SolicitadoPor">Cliente:</label>
+                    <InputText @bind-Value="Ticket.Cliente" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Cliente)" />
+                </div>
+
+                @*SolicitadoPor*@
+                <div class="mb-3">
+                    <label class="form-label" for="SolicitadoPor">SolicitadoPor:</label>
+                    <InputText @bind-Value="Ticket.SolicitadoPor" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.SolicitadoPor)" />
+                </div>
+
+                @*Asunto*@
+                <div class="mb-3">
+                    <label class="form-label" for="Asunto">Asunto:</label>
+                    <InputText @bind-Value="Ticket.Asunto" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Asunto)" />
+                </div>
+
+                @*Descripcion*@
+                <div class="mb-3">
+                    <label class="form-label" for="Descripcion">Solicitud:</label>
+                    <InputText @bind-Value="Ticket.Solicitud" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Solicitud)" />
+                </div>
+
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+                    <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document" /></button>
+                    <button type="button" class="btn btn-outline-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+<label>@Mensaje</label>
+
+@code {
+    public Tickets Ticket { get; set; } = new Tickets();
+
+    public string Mensaje { get; set; } = string.Empty;
+
+    public void Buscar()
+    {
+        var encontrado = ticketBLL.Buscar(Ticket.TicketId);
+        if (encontrado != null)
+            Ticket = encontrado;
+        else
+            Mensaje = "No se encontro el ticket";
+    }
+
+    public void Guardar()
+    {
+        if (Validar())
+        {
+            var guardo = ticketBLL.Save(Ticket);
+            if (guardo)
+            {
+                Mensaje = "Se guardo correctamente";
+                Nuevo();
+            }
+            else
+                Mensaje = "No se pudo guardar el ticket";
+        }
+        else
+        {
+            Mensaje = "Debes de llenar todos los campos";
+        }
+
+    }
+
+    public void Nuevo()
+    {
+        this.Ticket = new Tickets();
+        Mensaje = string.Empty;
+    }
+
+    public void Eliminar()
+    {
+        if (Validar())
+        {
+            var eliminado = ticketBLL.Delete(Ticket.TicketId);
+            if (eliminado)
+            {
+                Mensaje = "Se elimino correctamente";
+                Nuevo();
+            }
+            else
+                Mensaje = "No se pudo eliminar el ticket";
+        }
+        else
+        {
+            Mensaje = "No se puede eliminar";
+        }
+
+    }
+
+    public bool Validar()
+    {
+        var ticketNoNull = Ticket.Cliente != null;
+        var ticketMayorCero = !(ticketBLL.Exists(Ticket.TicketId)) || Ticket.TicketId > 0;
+        var AsuntoVacio = (!string.IsNullOrEmpty(Ticket.Asunto));
+        var SolicitudVacia = (!string.IsNullOrEmpty(Ticket.Solicitud));
+        var SolicitadoPorVacia = (!string.IsNullOrEmpty(Ticket.SolicitadoPor));
+        return ticketNoNull && ticketMayorCero && AsuntoVacio && SolicitudVacia && SolicitadoPorVacia;
+    }
+}

@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Malo", "Malo", "{03E6AC77-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerExample", "..\BlazorServerExample\BlazorServerExample.csproj", "{9FD168B7-AB45-4993-B785-E658F9A53205}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketAppDotnet8", "TicketAppDotnet8\TicketAppDotnet8.csproj", "{D09500C7-E316-44D9-B8ED-872DEF4104D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,18 @@ Global
 		{9FD168B7-AB45-4993-B785-E658F9A53205}.Release|x64.Build.0 = Release|Any CPU
 		{9FD168B7-AB45-4993-B785-E658F9A53205}.Release|x86.ActiveCfg = Release|Any CPU
 		{9FD168B7-AB45-4993-B785-E658F9A53205}.Release|x86.Build.0 = Release|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Debug|x64.Build.0 = Debug|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Debug|x86.Build.0 = Debug|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Release|x64.ActiveCfg = Release|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Release|x64.Build.0 = Release|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{D09500C7-E316-44D9-B8ED-872DEF4104D8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
