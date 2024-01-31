@@ -1,7 +1,29 @@
 ﻿@page "/"
-
+@using System.Net.Http.Headers
+@using System.Net
+@using Microsoft.AspNetCore.Http
+@inject HttpClient httpClient
+@inject MyCustomClient customClient
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+    @if(TicketsList is not null)
+    @foreach(var ticket in TicketsList)
+    {
+        <Row Ticket="ticket"/>
+    }
 
-Welcome to your new app.
+@code{
+    public List<TicketsDTO?> TicketsList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        httpClient.DefaultRequestHeaders.Add("X-API-Key", "test");
+        // TicketsList = await httpClient.GetFromJsonAsync<List<TicketsDTO?>>("https://sag-api-dev.azurewebsites.net/api/Tickets") ?? new List<TicketsDTO>();
+
+        TicketsList = await customClient.GetTicketsAsync();
+        var ticket = await customClient.GetTicketByIdAsync(1);
+        Console.WriteLine("h");
+    }
+
+}
