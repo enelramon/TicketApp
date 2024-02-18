@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 
-package com.ucne.ticketcompose.ui
+package com.ucne.ticketcompose.ui.documentos
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,8 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ucne.ticketcompose.data.remote.dto.DocumentosDto
-import com.ucne.ticketcompose.ui.documentos.DocumentosUiState
-import com.ucne.ticketcompose.ui.documentos.DocumentosViewModel
 
 
 @Composable
@@ -39,16 +38,27 @@ fun VentasListScreen(viewModel: DocumentosViewModel = hiltViewModel()) {
 
     val uiState: DocumentosUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    VentasListBody(uiState.documentos)
+    VentasListBody(uiState)
 }
+
 @Composable
-fun VentasListBody(documentos: List<DocumentosDto>) {
+fun VentasListBody(uiState: DocumentosUiState) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Row( verticalAlignment = Alignment.CenterVertically) {
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(imageVector = Icons.Outlined.Info, contentDescription = "information")
-            Text(text = "Presione sobre un documento para reimprimirlo",
-                style = MaterialTheme.typography.titleSmall)
+            Text(
+                text = "Presione sobre un documento para reimprimirlo",
+                style = MaterialTheme.typography.titleSmall
+            )
         }
+
+        uiState.error?.let {
+            Text(text = it, color = MaterialTheme.colorScheme.error)
+        }
+
+        if (uiState.isLoading)
+            CircularProgressIndicator()
 
         Divider(color = Color.Black, thickness = 1.dp)
 
@@ -77,7 +87,7 @@ fun VentasListBody(documentos: List<DocumentosDto>) {
         Divider(color = Color.Black, thickness = 1.dp)
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            items(documentos) { item ->
+            items(uiState.documentos) { item ->
                 VentaRow(item)
             }
         }
@@ -89,10 +99,11 @@ fun VentasListBody(documentos: List<DocumentosDto>) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Total: 10")
-            Text(text = "5,000.00")
+            Text(text = "Total: ${uiState.documentos.count()}")
+            Text(text = uiState.documentos.sumOf {
+                it.Total
+            }.toString())
         }
-
     }
 }
 
@@ -109,7 +120,7 @@ fun VentaRow(item: DocumentosDto) {
         )
         {
             Text(
-                text = item.Rnc ,
+                text = item.Rnc,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -135,9 +146,13 @@ fun VentaRow(item: DocumentosDto) {
 @Preview(showSystemUi = true)
 @Composable
 fun VentasListScreenPreview() {
-val documentos = listOf<DocumentosDto>(
-    DocumentosDto( Numero = 1, Rnc ="131114776", Cantidad = 1.0, Total = 1000.00),
-    DocumentosDto(Numero = 2, Rnc ="131114", Cantidad = 2.0, Total = 2000.00)
-)
-    VentasListBody(documentos)
+    val uiState = DocumentosUiState(
+        isLoading = true,
+        documentos = listOf<DocumentosDto>(
+            DocumentosDto(Numero = 1, Rnc = "131114776", Cantidad = 1.0, Total = 1000.00),
+            DocumentosDto(Numero = 2, Rnc = "131114", Cantidad = 2.0, Total = 2000.00)
+        ),
+        error = "paso algo feo"
+    )
+    VentasListBody(uiState)
 }

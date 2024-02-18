@@ -1,7 +1,5 @@
-package com.sagrd.hiltdemo.data.remote.dto
+package com.ucne.ticketcompose.data.remote.dto
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.squareup.moshi.Json
 import java.time.LocalDate
 import java.time.LocalDateTime

@@ -6,6 +6,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.ucne.ticketcompose.data.local.TicketDb
 import com.ucne.ticketcompose.data.remote.AuthInterceptor
+import com.ucne.ticketcompose.data.remote.DocumentosApi
 import com.ucne.ticketcompose.data.remote.TicketApi
 import dagger.Module
 import dagger.Provides
@@ -58,5 +59,15 @@ object AppModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(TicketApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesDocumentosApi(moshi: Moshi):DocumentosApi{
+        return Retrofit.Builder()
+            .baseUrl("https://my-json-server.typicode.com/enelramon/apimock/")
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create(DocumentosApi::class.java)
     }
 }
