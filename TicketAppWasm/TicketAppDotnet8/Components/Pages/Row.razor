@@ -1,0 +1,23 @@
+﻿    <div class="alert alert-secondary" role="alert" style="height 2rem">
+        <div class="row justify-content-between">
+            <div class="col">
+                <p><i class="bi bi-star"></i> @Ticket.SolicitadoPor <i class="bi bi-plus-lg text-warning" style="font-size: 20px;" /></p>
+            </div>
+            <div class="col-auto me-auto">
+                <p>Fecha: @Ticket.Fecha.ToString("dd/MM/yyyy")</p>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col">
+                    <p><i class="bi bi-zoom-in"></i> @Ticket.Asunto</p>
+                </div>
+                <div class="col-auto me-auto">
+                    <p>Vence: @Ticket.Vence?.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@code {
+  [Parameter]
+  public TicketsDTO Ticket { get; set; }  
+}

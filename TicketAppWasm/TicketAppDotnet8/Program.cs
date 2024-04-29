@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TicketAppDotnet8.BLL;
 using TicketAppDotnet8.Components;
 using TicketAppDotnet8.DAL;
@@ -16,6 +17,18 @@ builder.Services.AddDbContextFactory<Context>(options =>
 );
 builder.Services.AddScoped<TicketsBLL>();
 builder.Services.AddScoped<TicketsViewModel>();
+
+builder.Configuration.GetSection("ApiSettings").Bind(builder.Configuration);
+
+builder.Services.AddHttpClient<MyCustomClient>((services, client) =>
+{
+    var apiSettings = services.GetRequiredService<IOptions<ApiSettings>>();
+    client.BaseAddress = new Uri(apiSettings.Value.BaseUrl);
+    client.DefaultRequestHeaders.Add("X-API-Key", apiSettings.Value.ApiKey);
+});
+
+builder.Services.AddScoped<MyCustomClient>();
+
 
 var app = builder.Build();
 
