@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Malo", "Malo", "{03E6AC77-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerExample", "..\BlazorServerExample\BlazorServerExample.csproj", "{9FD168B7-AB45-4993-B785-E658F9A53205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketAppDotnet8", "TicketAppDotnet8\TicketAppDotnet8.csproj", "{D09500C7-E316-44D9-B8ED-872DEF4104D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketAppDotnet8", "TicketAppDotnet8\TicketAppDotnet8.csproj", "{D09500C7-E316-44D9-B8ED-872DEF4104D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
